@@ -2,30 +2,27 @@
 use strict;
 use warnings;
 
-BEGIN { require 5.006; }
+use 5.006;
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Create a Release Tag Before Building the Distribution.',
-  'AUTHOR' => 'Stirling Westrup <swestrup@gmail.com>',
-  'BUILD_REQUIRES' => {
-    'English' => '0',
-    'Test::More' => '0'
+  "ABSTRACT" => "Create a Release Tag Before Building the Distribution.",
+  "AUTHOR" => "Stirling Westrup <swestrup\@gmail.com>",
+  "BUILD_REQUIRES" => {},
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
-  },
-  'DISTNAME' => 'Dist-Zilla-Plugin-Git-Tag-ForRelease',
-  'EXE_FILES' => [],
-  'LICENSE' => 'gpl',
-  'NAME' => 'Dist::Zilla::Plugin::Git::Tag::ForRelease',
-  'PREREQ_PM' => {},
-  'VERSION' => '0.01',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "DISTNAME" => "Dist-Zilla-Plugin-Git-Tag-ForRelease",
+  "EXE_FILES" => [],
+  "LICENSE" => "gpl",
+  "NAME" => "Dist::Zilla::Plugin::Git::Tag::ForRelease",
+  "PREREQ_PM" => {},
+  "VERSION" => "0.02",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

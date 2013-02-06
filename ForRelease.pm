@@ -6,13 +6,11 @@ use Moose;
 BEGIN
   {
     $Dist::Zilla::Plugin::Git::Tag::ForRelease::VERSION
-      = substr '$$Version: 0.01 $$', 11, -3;
+      = substr '$$Version: 0.02 $$', 11, -3;
   }
 
 use Git;
 use Perl::Version;
-
-use Data::Dumper;
 
 with
   ( 'Dist::Zilla::Role::BeforeBuild'
@@ -96,10 +94,11 @@ has repo       =>
   , init_arg   => undef
   );
 
-has is_trial =>
-  ( is      => 'rw'
-  , isa     => 'Bool'
-  , default => sub { return $_[0]->zilla->is_trial; }
+has is_trial   =>
+  ( is	       => 'rw'
+  , isa	       => 'Bool'
+  , lazy_build => 1
+  , init_arg   => undef
   );
 
 # Object representing the version we tag with.
@@ -133,6 +132,12 @@ sub _update_debug
     $self->logger->set_debug($arg);
     $self->log_debug("Debug now set to $arg");
     return $arg;
+  }
+
+sub _build_is_trial
+  { my $self = shift;
+
+    return $self->zilla->is_trial;
   }
 
 sub _build_repo
@@ -204,6 +209,7 @@ sub _build_verobj
 
 sub _build_version
   { my $self = shift;
+
     my $ver = $self->verobj;
 
     my $fmt = $self->is_trial
@@ -266,7 +272,7 @@ Create a Release Tag Before Building the Distribution.
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
