@@ -13,5 +13,11 @@ meta-spec:
   version: 1.4
 name: Dist-Zilla-Plugin-Git-Tag-ForRelease
 requires:
+  Dist::Zilla::Role::AfterRelease: 0
+  Dist::Zilla::Role::BeforeBuild: 0
+  Dist::Zilla::Role::VersionProvider: 0
+  Git: 0
+  Moose: 0
+  Perl::Version: 0
   perl: 5.006
-version: 0.02
+version: 0.03

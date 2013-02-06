@@ -1,6 +1,16 @@
 Revision History for Dist-Zilla-Plugin-Git-Tag-ForRelease
 =========================================================
 
+v0.03 2013-02-06
+----------------
+
+* Date: 2013-02-06 13:45:32 -0500
+  Commit: Stirling Westrup <stirling@userful.ca>
+  Hash: dc48e702ff244b68a5186ff9cffdd35ec655eeb5
+
+    Update dist.ini to correctly scan for runtime dependencies
+
+
 v0.02 2013-02-06
 ----------------
 

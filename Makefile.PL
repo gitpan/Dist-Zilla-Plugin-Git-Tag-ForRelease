@@ -19,8 +19,15 @@ my %WriteMakefileArgs = (
   "EXE_FILES" => [],
   "LICENSE" => "gpl",
   "NAME" => "Dist::Zilla::Plugin::Git::Tag::ForRelease",
-  "PREREQ_PM" => {},
-  "VERSION" => "0.02",
+  "PREREQ_PM" => {
+    "Dist::Zilla::Role::AfterRelease" => 0,
+    "Dist::Zilla::Role::BeforeBuild" => 0,
+    "Dist::Zilla::Role::VersionProvider" => 0,
+    "Git" => 0,
+    "Moose" => 0,
+    "Perl::Version" => 0
+  },
+  "VERSION" => "0.03",
   "test" => {
     "TESTS" => "t/*.t"
   }
