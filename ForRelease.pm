@@ -6,7 +6,7 @@ use Moose;
 BEGIN
   {
     $Dist::Zilla::Plugin::Git::Tag::ForRelease::VERSION
-      = substr '$$Version: 0.03 $$', 11, -3;
+      = substr '$$Version: 0.04 $$', 11, -3;
   }
 
 use Git;
@@ -169,30 +169,30 @@ sub _build_verobj
 	die unless $e =~ m/No names found/;
 	if( $self->is_trial && !$self->tag_trials)
 	  {
-	    $self->log
+	    $self->logger->log_fatal
 	      ( "No previous tags found, and in trial mode\n"
 	      . "Please create a base tag, run release without --trial,\n"
 	      . "or turn on the tag_trials flag in dist.ini"
 	      );
-	    die("Stopped");
 	  }
+
 	$tag = $self->tag_prefix.$self->base_version;
-	$self->log_debug("Creating a base tag: $tag");
+	$self->logger->log_debug("Creating a base tag: $tag");
 	my ($base) = $git->rev_list({reverse => 1},'HEAD');
-	$self->log_debug("Base commit is: $base");
+	$self->logger->log_debug("Base commit is: $base");
 	$git->tag({m => "Base Tag for Tagging Releases"}, $tag, $base);
 	($desc) = $git->describe( my $x={%$descopt} );
       }
 
-    $self->log_debug("Describe: $desc");
+    $self->logger->log_debug("Describe: $desc");
     ($tag,$count,$commit) = ($desc =~  m/^(.*)-(\d+)-g([0-9a-f]{40})$/);
-    $self->log_debug("Desc: $tag, $count, $commit");
+    $self->logger->log_debug("Desc: $tag, $count, $commit");
 
     my $version = Perl::Version->new( $tag );
 
     if( !$count )
       {
-	$self->log("Already Tagged. Not tagging again.");
+	$self->logger->log("Already Tagged. Not tagging again.");
 	$self->will_tag(0);
 	return $version;
       }
@@ -217,7 +217,7 @@ sub _build_version
       : $self->version_format;
 
     my $str = sprintf($fmt,$ver->components,$ver->alpha);
-    $self->log("Version String is: $str");
+    $self->logger->log("Version String is: $str");
     return $str;
   }
 
@@ -232,7 +232,7 @@ sub before_build
 
     my $tag = $self->tag_prefix.$self->version;
 
-    $self->log
+    $self->logger->log
       ( ($self->will_tag ? "Tagging With: " : "Pretending to Tag: ")
 	. $tag
       );
@@ -242,7 +242,7 @@ sub before_build
 
     $cleanup_hook = sub
       {
-	$self->log("Removing Tag because Release did not complete.");
+	$self->logger->log("Removing Tag because Release did not complete.");
 	$git->tag({d => 1}, $tag);
       };
   }
@@ -272,7 +272,7 @@ Create a Release Tag Before Building the Distribution.
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
