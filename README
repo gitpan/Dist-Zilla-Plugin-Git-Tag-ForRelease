@@ -3,7 +3,7 @@ NAME
     Building the Distribution.
 
 VERSION
-    version 0.04
+    version v0.05
 
 SYNOPSIS
     In your dist.ini:

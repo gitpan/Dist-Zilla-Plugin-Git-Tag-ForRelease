@@ -6,7 +6,7 @@ use Moose;
 BEGIN
   {
     $Dist::Zilla::Plugin::Git::Tag::ForRelease::VERSION
-      = substr '$$Version: 0.04 $$', 11, -3;
+      = substr '$$Version: v0.05 $$', 11, -3;
   }
 
 use Git;
@@ -272,7 +272,7 @@ Create a Release Tag Before Building the Distribution.
 
 =head1 VERSION
 
-version 0.04
+version v0.05
 
 =head1 SYNOPSIS
 

@@ -20,4 +20,4 @@ requires:
   Moose: 0
   Perl::Version: 0
   perl: 5.006
-version: 0.04
+version: v0.05
